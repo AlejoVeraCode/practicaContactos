@@ -29,11 +29,9 @@ const agregarContacto = (req, res) => {
 }
 
 const todosLosContactos = async (modelo) => {
-    const resultados = await modelo.find({}, (err, docs)=>{
-        return docs
-    })
-    return resultados
-}
+    const resultados = await modelo.find({}).exec();
+    return resultados;
+};
 
 const borrarContacto = (modelo, id, res) => {
     modelo.deleteOne({_id: id}, (err,doc)=> {
