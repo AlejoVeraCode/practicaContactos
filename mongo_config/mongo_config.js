@@ -33,10 +33,15 @@ const todosLosContactos = async (modelo) => {
     return resultados;
 };
 
-const borrarContacto = (modelo, id, res) => {
-    modelo.deleteOne({_id: id}, (err,doc)=> {
-        res.redirect('/')
-    })
+const borrarContacto = async (modelo, id, res) => {
+    try {
+        const resultado = await modelo.deleteOne({_id: id});
+        res.redirect('/');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error al eliminar el contacto');
+    }
 }
+
 
 export {Contacto, agregarContacto, todosLosContactos, borrarContacto}
